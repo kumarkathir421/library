@@ -22,14 +22,21 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # Step 3: Build with Maven
-      - name: Build with Maven
-        run: mvn clean package -DskipTests
+      # Step 3: Build and run tests with JaCoCo coverage
+      - name: Build and verify
+        run: mvn -B clean verify
 
       # Step 4: Build Docker image
       - name: Build Docker image
         run: docker build -t library-api .
 
-      # Step 5 (Optional): Test image
+      # Step 5 (Optional): List Docker images (for verification)
       - name: List Docker images
         run: docker images | grep library-api
+
+      # Step 6: Upload JaCoCo report as build artifact
+      - name: Upload JaCoCo report
+        uses: actions/upload-artifact@v3
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/

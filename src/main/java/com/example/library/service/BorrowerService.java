@@ -1,20 +1,13 @@
 package com.example.library.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-import com.example.library.model.Borrower;
-import com.example.library.repository.BorrowerRepository;
+import com.example.library.dto.BorrowerDto;
 
-@Service
-public class BorrowerService {
-	
-	@Autowired
-	private BorrowerRepository borrowerRepository;
-	
-	public Borrower registerBorrower(Borrower borrower) {
-	    return borrowerRepository.save(borrower);
-	}
-	
+public interface BorrowerService {
+
+    public BorrowerDto.BorrowerResponse registerBorrower(BorrowerDto.BorrowerRequest request);
+    
+    public List<BorrowerDto.BorrowerResponse> getAllBorrowers();
 
 }

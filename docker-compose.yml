@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: library-api
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - LOG_PATH=/logs
+      # H2 in-memory DB doesn't require external host or credentials
+      - JDBC_DATABASE_URL=jdbc:h2:mem:librarydb;DB_CLOSE_DELAY=-1
+      - JDBC_DATABASE_USERNAME=sa
+      - JDBC_DATABASE_PASSWORD=
+    volumes:
+      - ./logs:/logs        # Mount local 'logs' folder into container '/logs'

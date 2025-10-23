@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <!-- =============================================== -->
+    <!-- Define properties                            -->
+    <!-- =============================================== -->
+    <springProperty scope="context" name="LOG_PATH" source="LOG_PATH" defaultValue="./logs" />
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name" defaultValue="library-api" />
+    <springProperty scope="context" name="ACTIVE_PROFILE" source="spring.profiles.active" defaultValue="dev" />
+
+    <!-- =============================================== -->
+    <!-- Environment Variables                            -->
+    <!-- =============================================== -->
+    <!-- Log format plain text -->
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId}:%X{spanId}] %logger{36} - %msg%n"/>
+
+
+    <!-- =============================================== -->
+    <!-- Console appender                  -->
+    <!-- =============================================== -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- =============================================== -->
+    <!-- Rolling file appender (for log files)    -->
+    <!-- =============================================== -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${APP_NAME}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Daily rotation -->
+            <fileNamePattern>${LOG_PATH}/${APP_NAME}-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+
+            <!-- Keep last 7 days of logs -->
+            <maxHistory>7</maxHistory>
+
+            <!-- Limit total log size (optional) -->
+            <totalSizeCap>1MB</totalSizeCap>
+
+            <!-- Compress old logs automatically -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- JSON file appender -->
+    <appender name="JSON_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${APP_NAME}.json</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/${APP_NAME}-%d{yyyy-MM-dd}.json</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp/>
+                <pattern>
+                    <pattern>
+                        {
+                          "level": "%level",
+                          "thread": "%thread",
+                          "logger": "%logger",
+                          "message": "%message",
+                          "context": "%mdc",
+                          "exception": "%exception{5}"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <!-- =============================================== -->
+    <!-- Environment-specific logging                 -->
+	<!-- =============================================== -->
+    <springProfile name="dev">
+        <root level="DEBUG">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="FILE" />
+        </root>
+    </springProfile>
+
+</configuration>
