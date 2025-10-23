@@ -1,0 +1,69 @@
+2025-10-24 00:26:06.922 [background-preinit] INFO  [:] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-10-24 00:26:07.053 [main] INFO  [:] c.e.library.LibraryApiApplication - Starting LibraryApiApplication using Java 17.0.16 with PID 2604 (C:\Users\Prakash\Documents\workspace\library\library-api\target\classes started by Prakash in C:\Users\Prakash\Documents\workspace\library\library-api)
+2025-10-24 00:26:07.057 [main] DEBUG [:] c.e.library.LibraryApiApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+2025-10-24 00:26:07.061 [main] INFO  [:] c.e.library.LibraryApiApplication - The following 1 profile is active: "dev"
+2025-10-24 00:26:14.137 [main] INFO  [:] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-24 00:26:14.665 [main] INFO  [:] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 495 ms. Found 3 JPA repository interfaces.
+2025-10-24 00:26:18.701 [main] INFO  [:] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-10-24 00:26:18.755 [main] INFO  [:] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-10-24 00:26:18.766 [main] INFO  [:] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-10-24 00:26:18.767 [main] INFO  [:] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2025-10-24 00:26:19.110 [main] INFO  [:] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-10-24 00:26:19.112 [main] INFO  [:] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 11844 ms
+2025-10-24 00:26:19.782 [main] INFO  [:] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-10-24 00:26:20.825 [main] INFO  [:] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:librarydb user=SA
+2025-10-24 00:26:20.833 [main] INFO  [:] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-10-24 00:26:20.867 [main] INFO  [:] o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:librarydb'
+2025-10-24 00:26:21.782 [main] DEBUG [:] c.e.l.c.RequestResponseLoggingFilter - Filter 'requestResponseLoggingFilter' configured for use
+2025-10-24 00:26:22.216 [main] INFO  [:] o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-24 00:26:22.536 [main] INFO  [:] org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-10-24 00:26:22.702 [main] INFO  [:] o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-24 00:26:24.302 [main] INFO  [:] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-24 00:26:29.032 [main] INFO  [:] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-24 00:26:30.181 [main] INFO  [:] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-24 00:26:34.702 [main] WARN  [:] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-24 00:26:34.872 [main] INFO  [:] o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-10-24 00:26:38.729 [main] INFO  [:] o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoints beneath base path '/actuator'
+2025-10-24 00:26:38.964 [main] INFO  [:] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-10-24 00:26:39.160 [main] INFO  [:] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-10-24 00:26:39.225 [main] INFO  [:] c.e.library.LibraryApiApplication - Started LibraryApiApplication in 39.909 seconds (process running for 44.152)
+2025-10-24 00:26:52.235 [RMI TCP Connection(12)-127.0.0.1] INFO  [:] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-24 00:26:52.235 [RMI TCP Connection(12)-127.0.0.1] INFO  [:] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-10-24 00:26:52.239 [RMI TCP Connection(12)-127.0.0.1] INFO  [:] o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2025-10-24 00:28:57.148 [RMI TCP Connection(16)-127.0.0.1] INFO  [:] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2025-10-24 00:28:57.159 [RMI TCP Connection(16)-127.0.0.1] INFO  [:] o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+2025-10-24 00:28:57.431 [RMI TCP Connection(16)-127.0.0.1] INFO  [:] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-24 00:28:57.451 [RMI TCP Connection(16)-127.0.0.1] INFO  [:] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-10-24 00:28:57.461 [RMI TCP Connection(16)-127.0.0.1] INFO  [:] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-10-24 00:29:28.410 [background-preinit] INFO  [:] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-10-24 00:29:28.596 [main] INFO  [:] c.e.library.LibraryApiApplication - Starting LibraryApiApplication using Java 17.0.16 with PID 11540 (C:\Users\Prakash\Documents\workspace\library\library-api\target\classes started by Prakash in C:\Users\Prakash\Documents\workspace\library\library-api)
+2025-10-24 00:29:28.598 [main] DEBUG [:] c.e.library.LibraryApiApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+2025-10-24 00:29:28.621 [main] INFO  [:] c.e.library.LibraryApiApplication - The following 1 profile is active: "dev"
+2025-10-24 00:29:32.993 [main] INFO  [:] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-24 00:29:33.251 [main] INFO  [:] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 233 ms. Found 3 JPA repository interfaces.
+2025-10-24 00:29:35.951 [main] INFO  [:] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-10-24 00:29:36.018 [main] INFO  [:] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-10-24 00:29:36.032 [main] INFO  [:] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-10-24 00:29:36.034 [main] INFO  [:] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2025-10-24 00:29:36.319 [main] INFO  [:] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-10-24 00:29:36.320 [main] INFO  [:] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 7483 ms
+2025-10-24 00:29:36.700 [main] INFO  [:] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-10-24 00:29:37.472 [main] INFO  [:] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:librarydb user=SA
+2025-10-24 00:29:37.477 [main] INFO  [:] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-10-24 00:29:37.510 [main] INFO  [:] o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:librarydb'
+2025-10-24 00:29:38.001 [main] DEBUG [:] c.e.l.c.RequestResponseLoggingFilter - Filter 'requestResponseLoggingFilter' configured for use
+2025-10-24 00:29:38.451 [main] INFO  [:] o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-24 00:29:38.887 [main] INFO  [:] org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-10-24 00:29:39.211 [main] INFO  [:] o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-24 00:29:40.773 [main] INFO  [:] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-24 00:29:46.749 [main] INFO  [:] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-24 00:29:47.025 [main] INFO  [:] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-24 00:29:48.720 [main] WARN  [:] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-24 00:29:48.851 [main] INFO  [:] o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-10-24 00:29:52.069 [main] INFO  [:] o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoints beneath base path '/actuator'
+2025-10-24 00:29:52.412 [main] INFO  [:] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-10-24 00:29:52.557 [main] INFO  [:] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-10-24 00:29:52.611 [main] INFO  [:] c.e.library.LibraryApiApplication - Started LibraryApiApplication in 25.809 seconds (process running for 27.806)
+2025-10-24 00:29:53.153 [RMI TCP Connection(10)-127.0.0.1] INFO  [:] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-24 00:29:53.154 [RMI TCP Connection(10)-127.0.0.1] INFO  [:] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-10-24 00:29:53.158 [RMI TCP Connection(10)-127.0.0.1] INFO  [:] o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms

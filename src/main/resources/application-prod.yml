@@ -1,11 +1,16 @@
 spring:
   datasource:
-    url: ${JDBC_DATABASE_URL}
-    username: ${JDBC_DATABASE_USERNAME}
-    password: ${JDBC_DATABASE_PASSWORD}
+    url: jdbc:postgresql://db:5432/librarydb
+    username: library_user
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: validate
-server:
-  port: ${PORT:8080}
+    show-sql: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
