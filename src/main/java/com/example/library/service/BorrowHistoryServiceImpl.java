@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BorrowHistoryServiceImpl {
+public class BorrowHistoryServiceImpl implements BorrowHistoryService {
 
 	private final BorrowHistoryRepository borrowHistoryRepository;
 

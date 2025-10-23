@@ -1,29 +1,32 @@
 package com.example.library.config;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.time.Instant;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.UUID;
 
 @Slf4j
 @Component
 @Profile("dev")
 public class RequestResponseLoggingFilter extends OncePerRequestFilter {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final String TRACE_ID = "traceId";
+    private static final String SPAN_ID = "spanId";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -31,71 +34,81 @@ public class RequestResponseLoggingFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        long startTime = Instant.now().toEpochMilli();
+        // skip non-API routes (to avoid logging HTML, JS, etc.)
+        if (shouldNotFilter(request)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
-        // Wrap both request & response so we can read bodies after execution
-        ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
-        ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response);
+        // assign trace/span
+        String traceId = UUID.randomUUID().toString().substring(0, 8);
+        String spanId = UUID.randomUUID().toString().substring(0, 8);
+        MDC.put(TRACE_ID, traceId);
+        MDC.put(SPAN_ID, spanId);
+
+        // wrap request/response to read body
+        var reqWrapper = new ContentCachingRequestWrapper(request);
+        var resWrapper = new ContentCachingResponseWrapper(response);
+
+        var start = Instant.now();
 
         try {
-            filterChain.doFilter(requestWrapper, responseWrapper);
+            filterChain.doFilter(reqWrapper, resWrapper);
         } finally {
-            long duration = Instant.now().toEpochMilli() - startTime;
+            long timeMs = Duration.between(start, Instant.now()).toMillis();
 
-            logRequestDetails(requestWrapper);
-            logResponseDetails(responseWrapper, duration);
+            logRequest(reqWrapper, traceId, spanId);
+            logResponse(resWrapper, traceId, spanId, timeMs);
 
-            // Important: copy the cached response body back to the actual response output
-            responseWrapper.copyBodyToResponse();
+            resWrapper.copyBodyToResponse(); // required
+            MDC.clear();
         }
     }
 
-    private void logRequestDetails(ContentCachingRequestWrapper request) {
-        String method = request.getMethod();
-        String uri = request.getRequestURI();
-
-        String body = "";
-        try {
-            byte[] buf = request.getContentAsByteArray();
-            if (buf.length > 0) {
-                body = new String(buf, StandardCharsets.UTF_8);
-            }
-        } catch (Exception ignored) { }
-
-        String formattedBody = prettyJson(body);
-        log.info("Request: [{} {}]\nBody:\n{}", method, uri, formattedBody);
+    private void logRequest(ContentCachingRequestWrapper req, String traceId, String spanId) {
+        String body = getBody(req.getContentAsByteArray());
+        log.info("\n📥 Request [{} {}] | traceId={} spanId={}\n{}\n",
+                req.getMethod(),
+                getFullUrl(req),
+                traceId,
+                spanId,
+                prettyJson(body));
     }
 
-    private void logResponseDetails(ContentCachingResponseWrapper response, long duration) {
-        int status = response.getStatus();
-
-        String body = "";
-        try {
-            byte[] buf = response.getContentAsByteArray();
-            if (buf.length > 0) {
-                body = new String(buf, StandardCharsets.UTF_8);
-            }
-        } catch (Exception ignored) { }
-
-        String formattedBody = prettyJson(body);
-        log.info("Response: [Status: {}] [Time: {} ms]\nBody:\n{}", status, duration, formattedBody);
+    private void logResponse(ContentCachingResponseWrapper res, String traceId, String spanId, long timeMs) {
+        String body = getBody(res.getContentAsByteArray());
+        log.info("\n📤 Response [{}] | traceId={} spanId={} | {} ms\n{}\n",
+                res.getStatus(),
+                traceId,
+                spanId,
+                timeMs,
+                prettyJson(body));
     }
 
-    private String prettyJson(String json) {
-        if (json == null || json.isBlank()) return "(no body)";
+    private String getFullUrl(HttpServletRequest request) {
+        String query = request.getQueryString();
+        return query == null ? request.getRequestURI() : request.getRequestURI() + "?" + query;
+    }
+
+    private String getBody(byte[] content) {
+        return content.length == 0 ? "" : new String(content, StandardCharsets.UTF_8);
+    }
+
+    private String prettyJson(String text) {
+        if (text == null || text.isBlank()) return "(no body)";
         try {
-            Object parsed = objectMapper.readValue(json, Object.class);
-            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(parsed);
+            Object json = mapper.readValue(text, Object.class);
+            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
         } catch (Exception e) {
-            return json;
+            // not JSON → print raw
+            return text.length() > 500 ? text.substring(0, 500) + "..." : text;
         }
     }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-      String path = request.getRequestURI();
-      // Exclude Swagger
-      return path.startsWith("/swagger") ||
-             path.startsWith("/v3/api-docs");
+        String uri = request.getRequestURI();
+        // Only log API calls
+        return !uri.startsWith("/api");
     }
 }
