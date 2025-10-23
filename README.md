@@ -1,6 +1,6 @@
 # 📚 Library Management REST API
 
-A simple, production-grade **Library System REST API** built with **Java 17** and **Spring Boot 3**, following clean-code and 12-Factor principles.
+A simple, production-grade **Library System REST API** built with **Java 17** and **Spring Boot 3**.
 
 ---
 
@@ -37,7 +37,9 @@ A simple, production-grade **Library System REST API** built with **Java 17** an
 ### 🧩 Local Setup (Dev Profile)
 
 App starts at → http://localhost:8080
+
 Swagger UI → http://localhost:8080/swagger-ui.html
+
 App Index → http://localhost:8080/index.html (Html file added only for testing since this is api)
 
 # 🐳 Run with Docker
@@ -79,12 +81,19 @@ View report in Actions → Artifacts → jacoco-report
 #🧩 Project Structure
 
 src/main/java/com/example/library
+
 ├── controller        # REST Controllers
+
 ├── dto               # Request/Response DTOs
+
 ├── exception         # Global Error Handling
+
 ├── model             # JPA Entities
+
 ├── repository        # Spring Data Repositories
+
 ├── service           # Business Logic
+
 └── LibraryApiApplication.java
 
 # 🏁 License
