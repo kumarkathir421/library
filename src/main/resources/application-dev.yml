@@ -24,3 +24,9 @@ logging:
     root: INFO
     org.springframework.web: INFO
     com.example.library: DEBUG
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html

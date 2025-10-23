@@ -108,7 +108,10 @@ public class RequestResponseLoggingFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String uri = request.getRequestURI();
-        // Only log API calls
-        return !uri.startsWith("/api");
+        return !uri.startsWith("/api") ||
+               uri.startsWith("/swagger") ||
+               uri.startsWith("/v3") ||
+               uri.contains("/webjars");
     }
+
 }
