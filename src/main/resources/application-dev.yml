@@ -24,9 +24,12 @@ logging:
     root: INFO
     org.springframework.web: INFO
     com.example.library: DEBUG
+    org.apache.coyote.http11.Http11InputBuffer: ERROR
 springdoc:
   api-docs:
     enabled: true
   swagger-ui:
     enabled: true
     path: /swagger-ui.html
+
+
