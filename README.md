@@ -59,11 +59,12 @@ GitHub url: https://github.com/kumarkathir421/library.git
 ### Steps to be followed using Play with Docker (PWD)
 1. Goto link https://labs.play-with-docker.com
 2. login -> Start -> Create new instance
-3. Use below commands in PWD Terminal to build jar and image
-	git clone https://github.com/kumarkathir421/library.git
-	cd library-api
-	docker build -t library-api:latest .
-	docker run -d -p 8080:8080 library-api:latest
+3. To build jar and image
+	#### Use below commands in PWD Terminal 
+		git clone https://github.com/kumarkathir421/library.git
+		cd library
+		docker build -t library-api:latest .
+		docker run -d -p 8080:8080 library-api:latest
 4. Verify it’s running
 	docker ps
 5. Access Your API in Browser
