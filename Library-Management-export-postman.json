@@ -1,0 +1,112 @@
+{
+    "info": {
+        "name": "RESTer",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Library",
+            "item": [
+                {
+                    "request": {
+                        "url": "http://localhost:8080/api/books",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"isbn\": \"1234\",\n    \"title\": \"Head First Java\",\n    \"author\": \"Kathy\"\n}"
+                        }
+                    },
+                    "id": "rester-4",
+                    "name": "1 - Register Book"
+                },
+                {
+                    "request": {
+                        "url": "http://localhost:8080/api/borrowers",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Alice\",\n  \"email\": \"alice@email.com\"\n}"
+                        }
+                    },
+                    "id": "rester-2",
+                    "name": "2 - Register Borrower"
+                },
+                {
+                    "request": {
+                        "url": "http://localhost:8080/api/books",
+                        "method": "GET",
+                        "header": []
+                    },
+                    "id": "rester-5",
+                    "name": "3 - Get All Book List"
+                },
+                {
+                    "request": {
+                        "url": "http://localhost:8080/api/borrowers",
+                        "method": "GET",
+                        "header": []
+                    },
+                    "id": "rester-3",
+                    "name": "4 - Get All Borrower List"
+                },
+                {
+                    "request": {
+                        "url": "http://localhost:8080/api/books/borrow/BOOK-00001?borrowerCode=BORR-00001",
+                        "method": "POST",
+                        "header": []
+                    },
+                    "id": "rester-6",
+                    "name": "5 - Borrow Book"
+                },
+                {
+                    "request": {
+                        "url": "http://localhost:8080/api/books/return/BOOK-00001",
+                        "method": "POST",
+                        "header": []
+                    },
+                    "id": "rester-7",
+                    "name": "6 - Return Book"
+                },
+                {
+                    "request": {
+                        "url": "http://localhost:8080/api/history",
+                        "method": "GET",
+                        "header": []
+                    },
+                    "id": "rester-8",
+                    "name": "7 - Get All Borrow History"
+                },
+                {
+                    "request": {
+                        "url": "http://localhost:8080/api/history/borrower/BORR-00001",
+                        "method": "GET",
+                        "header": []
+                    },
+                    "id": "rester-9",
+                    "name": "8 - Get Borrower Borrow History"
+                },
+                {
+                    "request": {
+                        "url": "http://localhost:8080/api/history/book/BOOK-00001",
+                        "method": "GET",
+                        "header": []
+                    },
+                    "id": "rester-10",
+                    "name": "9 - GET - Book Borrow History"
+                }
+            ]
+        }
+    ]
+}
