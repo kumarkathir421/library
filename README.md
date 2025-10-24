@@ -36,17 +36,17 @@ A simple, production-grade **Library System REST API** built with **Java 17** an
 
 ### 🧩 Local Setup (Dev Profile)
 
-App starts at → http://localhost:8080
+App starts at → http://localhost:8080	
 
-Swagger UI → http://localhost:8080/swagger-ui.html
+Swagger UI → http://localhost:8080/swagger-ui.html	
 
-Actuator - http://localhost:8080/actuator
+Actuator - http://localhost:8080/actuator	
 
-App Index → http://localhost:8080/index.html (Html file added only for testing since this is api)
+App Index → http://localhost:8080 (Html file added only for testing since this is api)	
 
-Base url should be replaced after deployment
+Base url should be replaced after deployment	
 
-### For Test Coverage using JaCoCo
+###### Test Coverage using JaCoCo
 	Run below maven command
 		mvn clean test
 		mvn jacoco:report
@@ -85,6 +85,11 @@ View report in Actions → Artifacts → jacoco-report
 
 Open target/site/jacoco/index.html to view Test coverage.
 
+#🧩 Screenshots
+https://github.com/kumarkathir421/library/blob/main/LibraryManagement%20Screenshots.pdf
+
+#🧩 Postman Collections
+https://github.com/kumarkathir421/library/blob/main/Library-Management-export-postman.json
 
 #🧩 API Endpoints
 
