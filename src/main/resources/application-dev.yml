@@ -23,7 +23,7 @@ logging:
   level:
     root: INFO
     org.springframework.web: INFO
-    com.example.library: DEBUG
+    com.collabera.library: DEBUG
     org.apache.coyote.http11.Http11InputBuffer: ERROR
 springdoc:
   api-docs:

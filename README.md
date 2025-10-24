@@ -40,21 +40,39 @@ App starts at → http://localhost:8080
 
 Swagger UI → http://localhost:8080/swagger-ui.html
 
+Actuator - http://localhost:8080/actuator
+
 App Index → http://localhost:8080/index.html (Html file added only for testing since this is api)
 
+Base url should be replaced after deployment
+
+### For Test Coverage using JaCoCo
+	Run below maven command
+		mvn clean test
+		mvn jacoco:report
+
+
 # 🐳 Run with Docker
-### Build jar and image
-mvn clean package -DskipTests
-docker build -t library-api .
 
-### Run container
-docker run -p 8080:8080 library-api
+GitHub url: https://github.com/kumarkathir421/library.git
 
-#☸️ Run with Docker Compose
-docker-compose up --build
-
-#🧩 Run Tests + Coverage
-mvn clean verify
+### Steps to be followed using Play with Docker (PWD)
+1. Goto link https://labs.play-with-docker.com
+2. login -> Start -> Create new instance
+3. Use below commands in PWD Terminal to build jar and image
+	git clone https://github.com/kumarkathir421/library.git
+	cd library-api
+	docker build -t library-api:latest .
+	docker run -d -p 8080:8080 library-api:latest
+4. Verify it’s running
+	docker ps
+5. Access Your API in Browser
+	click the 8080 link in PWD UI
+6. To stop running docker
+	docker stop $(docker ps -q)
+7. To check the logs
+	docker logs -f jovial_maxwell
+	docker logs jovial_maxwell
 
 #🧩 GitHub Actions (CI/CD)
 Each push or PR to main runs:
@@ -64,6 +82,10 @@ Each push or PR to main runs:
 3. Uploads coverage report as artifact
 
 View report in Actions → Artifacts → jacoco-report
+
+Open target/site/jacoco/index.html to view Test coverage.
+
+
 #🧩 API Endpoints
 
 | HTTP     | Endpoint                                     				| Description             				|
