@@ -46,8 +46,8 @@ App Index → http://localhost:8080 (Html file added only for testing since this
 
 Base url should be replaced after deployment	
 
-###### Test Coverage using JaCoCo
-	Run below maven command
+###### Test Coverage using JaCoCo in local set up
+	
 		mvn clean test
 		mvn jacoco:report
 
@@ -65,15 +65,18 @@ GitHub url: https://github.com/kumarkathir421/library.git
 		cd library
 		docker build -t library-api:latest .
 		docker run -d -p 8080:8080 library-api:latest
-4. Verify it’s running
-	docker ps
-5. Access Your API in Browser
-	click the 8080 link in PWD UI
-6. To stop running docker
-	docker stop $(docker ps -q)
-7. To check the logs
-	docker logs -f jovial_maxwell
-	docker logs jovial_maxwell
+4. To verify docker is running
+
+		docker ps
+6. Access Your API in Browser
+	click the 8080 link in PWD UI / Open Port enter 8080
+7. To stop running docker
+
+		docker stop $(docker ps -q)
+9. To check the logs
+	
+		docker logs -f jovial_maxwell
+		docker logs jovial_maxwell
 
 #🧩 GitHub Actions (CI/CD)
 Each push or PR to main runs:
